@@ -205,7 +205,6 @@ public class LibraryMenu {
                 case 7:
                     System.out.println("Exiting the system. Goodbye!");
                     scanner.close();
-                    running = false;
                     break;
                 default:
                     System.out.println("Invalid choice. Please enter a number between 1 and 6.");
