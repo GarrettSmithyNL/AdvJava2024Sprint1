@@ -1,10 +1,10 @@
-package library;
 
-import library.authors.Author;
-import library.patrons.Patron;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import Authors.Author;
+import Patrons.Patron;
 
 public class Library {
     private final List<Author> authors;

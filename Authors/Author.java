@@ -1,4 +1,4 @@
-package library.authors;
+package Authors;
 
 import java.util.ArrayList;
 import java.util.List;
