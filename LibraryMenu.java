@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import Authors.Author;
 import Patrons.Patron;
 public class LibraryMenu {
     public static void main(String[] args) {
@@ -31,10 +32,10 @@ public class LibraryMenu {
                         System.out.println("4. Go Back");
 
                         int itemOption = scanner.nextInt();
-
+                        
                         switch (itemOption) {
                             case 1:
-                                System.out.println("Which type of item would you like to add?");
+                                System.out.println("Which type oitem would you like to add?");
                                 break;
                             case 2:
                                 System.out.println("Which item would you like to edit?");
@@ -78,8 +79,7 @@ public class LibraryMenu {
                                 System.out.print("Enter Date of Birth: ");
                                 dateOfBirth = scanner.nextLine();
 
-                                library.addAuthor(authorID, name, dateOfBirth);
-                                
+                                library.addAuthor(new Author(authorID, name, dateOfBirth));
                                 
                                 break;
                             case 2:
