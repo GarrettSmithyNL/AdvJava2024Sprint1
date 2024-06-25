@@ -1,14 +1,12 @@
 package LibraryItems;
 import Authors.Author;
 
-public class BookPrinted extends Book implements Borrowable{
-  // Make an array list 
-  private static Publication[] booksTaken = new Publication[100];
+public class BookPrinted extends Book{
   private int numOfCopies;
   private int numOfPages;
 
-  public BookPrinted(String title, Author author, String publisher, String ISBN, int numOfCopies, int numOfPages) {
-    super(title, author, publisher, ISBN);
+  public BookPrinted(String title, Author author, String publisher, int publicationId, String ISBN, int numOfCopies, int numOfPages) {
+    super(title, author, publisher, publicationId, ISBN);
     this.numOfCopies = numOfCopies;
     this.numOfPages = numOfPages;
   }
@@ -29,25 +27,12 @@ public class BookPrinted extends Book implements Borrowable{
     this.numOfPages = numOfPages;
   }
 
-  public void checkoutPublication() {
-    this.setStatus(Status.CHECKED_OUT);
-    // push the book to the booksTaken array
-    for (int i = 0; i < booksTaken.length; i++) {
-      if (booksTaken[i] == null) {
-        booksTaken[i] = this;
-        break;
-      }
-    }
-  }
-
-  public void returnPublication() {
-    this.setStatus(Status.AVAILABLE);
-    // remove the book from the booksTaken array
-    for (int i = 0; i < booksTaken.length; i++) {
-      if (booksTaken[i] == this) {
-        booksTaken[i] = null;
-        break;
-      }
-    }
+  public static void editPublication(BookPrinted book, String newTitle, Author newAuthor, String newPublisher, String newISBN, int newNumOfCopies, int newNumOfPages) {
+    book.setTitle(newTitle);
+    book.setAuthor(newAuthor);
+    book.setPublisher(newPublisher);
+    book.setISBN(newISBN);
+    book.setNumOfCopies(newNumOfCopies);
+    book.setNumOfPages(newNumOfPages);
   }
 }
