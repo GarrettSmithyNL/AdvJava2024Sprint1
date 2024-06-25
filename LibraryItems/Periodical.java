@@ -1,4 +1,5 @@
 package LibraryItems;
+import Authors.Author;
 
 public abstract class Periodical extends  Publication {
   private static int nextPeriodicalId = 0;

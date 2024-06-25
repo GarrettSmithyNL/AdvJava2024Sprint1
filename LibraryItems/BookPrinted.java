@@ -1,6 +1,8 @@
 package LibraryItems;
+import Authors.Author;
 
 public class BookPrinted extends Book implements Borrowable{
+  // Make an array list 
   private static Publication[] booksTaken = new Publication[100];
   private int numOfCopies;
   private int numOfPages;

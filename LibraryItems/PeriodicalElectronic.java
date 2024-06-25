@@ -1,3 +1,6 @@
+package LibraryItems;
+import Authors.Author;
+
 public class PeriodicalElectronic extends Periodical {
   private int numOfPages;
 

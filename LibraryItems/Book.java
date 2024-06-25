@@ -1,4 +1,5 @@
 package LibraryItems;
+import Authors.Author;
 
 public abstract class Book extends Publication {
   private static int nextBookId = 0;

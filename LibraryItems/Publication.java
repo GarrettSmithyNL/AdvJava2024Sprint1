@@ -1,4 +1,5 @@
 package LibraryItems;
+import Authors.Author;
 
 public abstract class Publication {
   private String title;

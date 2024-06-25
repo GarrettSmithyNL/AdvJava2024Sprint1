@@ -1,4 +1,5 @@
 package LibraryItems;
+import Authors.Author;
 
 public class PeriodicalPrinted extends Periodical implements Borrowable{
   private static Publication[] periodicalsTaken = new Publication[100];

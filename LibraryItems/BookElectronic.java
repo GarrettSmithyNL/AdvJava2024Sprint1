@@ -1,4 +1,5 @@
 package LibraryItems;
+import Authors.Author;
 
 public class BookElectronic extends Book {
   private int numOfPages;

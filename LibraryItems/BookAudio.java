@@ -1,4 +1,5 @@
 package LibraryItems;
+import Authors.Author;
 
 public class BookAudio extends Book{
   private int durationSeconds;
