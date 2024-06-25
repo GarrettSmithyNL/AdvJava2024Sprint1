@@ -3,7 +3,7 @@ package Patrons;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Patron {
+public class Patron {
     private String patronID;
     private String name;
     private String address;

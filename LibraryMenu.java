@@ -1,10 +1,13 @@
 import java.util.Scanner;
 
+import Patrons.Patron;
 public class LibraryMenu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
-
+        
+        Library library = new Library();
+        
         while (running) {
             System.out.println("Welcome to the Library Management System");
             System.out.println("1. Manage Library Items");
@@ -32,7 +35,6 @@ public class LibraryMenu {
                         switch (itemOption) {
                             case 1:
                                 System.out.println("Which type of item would you like to add?");
-                                // Insert logic to add a new item
                                 break;
                             case 2:
                                 System.out.println("Which item would you like to edit?");
@@ -61,15 +63,38 @@ public class LibraryMenu {
                         System.out.println("4. Go Back");
 
                         int authorOption = scanner.nextInt();
-
+                        scanner.nextLine();
+                        String authorID, name, dateOfBirth;
                         switch (authorOption) {
                             case 1:
                                 System.out.println("Add a new author");
-                                // Add logic to add a new author
+                                System.out.println("Please enter author information.");
+                                System.out.print("Enter Author ID: ");
+                                authorID = scanner.nextLine();
+
+                                System.out.print("Enter Name: ");
+                                name = scanner.nextLine();
+
+                                System.out.print("Enter Date of Birth: ");
+                                dateOfBirth = scanner.nextLine();
+
+                                library.addAuthor(authorID, name, dateOfBirth);
+                                
+                                
                                 break;
                             case 2:
                                 System.out.println("Edit an existing author");
-                                // Add logic to edit an existing author
+                                System.out.println("Please enter the author ID of the author you would like to edit.");
+                                authorID = scanner.nextLine();
+
+                                System.out.println("Please enter the new information for the author.");
+                                System.out.print("Enter Name: ");
+                                name = scanner.nextLine();
+
+                                System.out.print("Enter Date of Birth: ");
+                                dateOfBirth = scanner.nextLine();
+
+                                library.editAuthor(authorID, name, dateOfBirth);
                                 break;
                             case 3:
                                 System.out.println("Delete an existing author");
@@ -94,19 +119,52 @@ public class LibraryMenu {
                         System.out.println("4. Go Back");
 
                         int patronOption = scanner.nextInt();
-
+                        scanner.nextLine();
+                        String patronID, name, address, phone;
                         switch (patronOption) {
                             case 1:
                                 System.out.println("Add a new patron");
-                                // Add logic to add a new patron
+                                System.out.println("Please enter patron information.");
+
+                                System.out.print("Enter Patron ID: ");
+                                patronID = scanner.nextLine();
+                        
+                                System.out.print("Enter Name: ");
+                                name = scanner.nextLine();
+                        
+                                System.out.print("Enter Address: ");
+                                address = scanner.nextLine();
+                        
+                                System.out.print("Enter Phone: ");
+                                phone = scanner.nextLine();
+                    
+                                library.addPatron(new Patron(patronID, name, address, phone));
+                                System.out.println("Patron added successfully!");
+                        
                                 break;
                             case 2:
                                 System.out.println("Edit an existing patron");
-                                // Add logic to edit an existing patron
+                                System.out.println("Please enter the patron ID of the patron you would like to edit.");
+                                patronID = scanner.nextLine();
+
+                                System.out.println("Please enter the new information for the patron.");
+                                System.out.print("Enter Name: ");
+                                name = scanner.nextLine();
+
+                                System.out.print("Enter Address: ");
+                                address = scanner.nextLine();
+                                
+                                System.out.print("Enter Phone: ");
+                                phone = scanner.nextLine();
+
+                                library.editPatron(patronID, name, address, phone);
                                 break;
                             case 3:
                                 System.out.println("Delete an existing patron");
-                                // Add logic to delete an existing patron
+                                System.out.println("Please enter the patron ID of the patron you would like to delete.");
+                                patronID = scanner.nextLine();
+                                library.removePatron(patronID);
+                                System.out.println("Patron with ID " + patronID +" has been deleted.");
                                 break;
                             case 4:
                                 System.out.println("Press 4 to go back to the main menu.");
