@@ -1,4 +1,4 @@
-package library.patrons;
+package Patrons;
 
 public class Student extends Patron {
     private String studentID;
