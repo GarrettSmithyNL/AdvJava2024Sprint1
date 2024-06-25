@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +56,7 @@ public class Library {
         patrons.removeIf(patron -> patron.getPatronID().equals(patronID));
     }
 
+
     // Publication management methods
 
     //create publication
@@ -99,6 +98,31 @@ public class Library {
         return temp;
     }
         
+    // Method to search publications
+    public List<Publication> searchPublications(String query) {
+        List<Publication> results = new ArrayList<>();
+        for (Author author : authors) {
+            for (String publicationID : author.getPublicationsWritten()) {
+                Publication publication = findPublicationByID(publicationID);
+                if (publication != null) {
+                    if (publication.getTitle().equalsIgnoreCase(query) ||
+                            publication.getAuthor().getName().equalsIgnoreCase(query) ||
+                            (publication instanceof Book && ((Book) publication).getISBN().equalsIgnoreCase(query))) {
+                        results.add(publication);
+                    }
+                }
+            }
+        }
+        return results;
+    }
+
+    // Helper method to find publication by ID
+    private Publication findPublicationByID(String publicationID) {
+        // This method should find and return a Publication object by its ID.
+        // Implementation depends on how publications are stored in the library.
+        // Assuming a list or map of publications exists.
+        return null; // Replace with actual implementation.
+    }
 }
 
 
