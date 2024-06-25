@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class LibraryMenu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int choice;
+        boolean running = true;
 
-        while (true) {
+        while (running) {
             System.out.println("Welcome to the Library Management System");
             System.out.println("1. Manage Library Items");
             System.out.println("2. Manage Authors");
@@ -212,4 +212,3 @@ public class LibraryMenu {
         }
     }
 }
-
