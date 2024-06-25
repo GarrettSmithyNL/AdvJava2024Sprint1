@@ -4,7 +4,7 @@ public class Employee extends Patron {
     private String employeeID;
     private String jobTitle;
 
-    public Employee(String patronID, String name, String address, String phone, String employeeID, String jobTitle) {
+    public Employee(int patronID, String name, String address, String phone, String employeeID, String jobTitle) {
         super(patronID, name, address, phone);
         this.employeeID = employeeID;
         this.jobTitle = jobTitle;
