@@ -8,25 +8,32 @@ import LibraryItems.*;
 import Patrons.Patron;
 
 public class Library {
+    // Static variables to keep track of the next ID to assign to a new Author, Patron, or Publication
     private static int publicationID = 1;
+    private static int authorID = 1;
+    private static int patronID = 1;
+    // Lists to store the Authors, Patrons, Publications, and checked out Publications
     private final List<Author> authors;
     private final List<Patron> patrons;
     private final List<Publication> publications;
+    private final List<int[]> checkedOutPublications;
 
+    // Constructor to initialize the lists
     public Library() {
         this.authors = new ArrayList<>();
         this.patrons = new ArrayList<>();
         this.publications = new ArrayList<>();
+        this.checkedOutPublications = new ArrayList<>();
     }
 
-    // Author management methods
+    // add, edit, and remove Author methods
     public void addAuthor(Author author) {
         authors.add(author);
     }
 
-    public void editAuthor(String authorID, String newName, String newDateOfBirth) {
+    public void editAuthor(int authorid, String newName, String newDateOfBirth) {
         for (Author author : authors) {
-            if (author.getAuthorID().equals(authorID)) {
+            if (author.getAuthorID() == authorid){
                 author.setName(newName);
                 author.setDateOfBirth(newDateOfBirth);
                 break;
@@ -34,18 +41,18 @@ public class Library {
         }
     }
 
-    public void removeAuthor(String authorID) {
-        authors.removeIf(author -> author.getAuthorID().equals(authorID));
+    public void removeAuthor(int authorid) {
+        authors.removeIf(author -> author.getAuthorID() == authorid);
     }
 
-    // Patron management methods
+    // add, edit, and remove Patron methods
     public void addPatron(Patron patron) {
         patrons.add(patron);
     }
 
-    public void editPatron(String patronID, String newName, String newAddress, String newPhone) {
+    public void editPatron(int patronid, String newName, String newAddress, String newPhone) {
         for (Patron patron : patrons) {
-            if (patron.getPatronID().equals(patronID)) {
+            if (patron.getPatronID() == patronid) {
                 patron.setName(newName);
                 patron.setAddress(newAddress);
                 patron.setPhone(newPhone);
@@ -54,13 +61,11 @@ public class Library {
         }
     }
 
-    public void removePatron(String patronID) {
-        patrons.removeIf(patron -> patron.getPatronID().equals(patronID));
+    public void removePatron(int patronid) {
+        patrons.removeIf(patron -> patron.getPatronID() == patronid);
     }
 
-    // Publication management methods
-
-    //create publication
+    // add, edit, and remove Publication methods
     public void addPublication(Publication publication) {
         publications.add(publication);
     }
@@ -70,7 +75,7 @@ public class Library {
             if (publication.getPublicationId() == publicationID) {
                 switch (publication.getClass().getName()) {
                     case "BookPrinted":
-                        BookPrinted.editPublication((BookPrinted) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfCopies, newNumOfPages);
+                        BookPrinted.editPublication((BookPrinted) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
                         break;
                     case "BookAudio":
                         BookAudio.editPublication((BookAudio) publication, newTitle, newAuthor, newPublisher, newISBN, newDurationSeconds, newVoicedBy);
@@ -79,7 +84,7 @@ public class Library {
                         BookElectronic.editPublication((BookElectronic) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
                         break;
                     case "PeriodicalPrinted":
-                        PeriodicalPrinted.editPublication((PeriodicalPrinted) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfCopies, newNumOfPages);
+                        PeriodicalPrinted.editPublication((PeriodicalPrinted) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
                         break;
                     case "PeriodicalElectronic":
                         PeriodicalElectronic.editPublication((PeriodicalElectronic) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
@@ -93,9 +98,34 @@ public class Library {
         publications.remove(publication);
     }
 
-    public static int generateID()  {
+    // Methods to take out and return Publications
+    public void takeOutPublication(Publication publication, Patron patron) {
+        publication.borrowItem();
+        int[] checkedOutPublication = {publication.getPublicationId(), patron.getPatronID()};
+        checkedOutPublications.add(checkedOutPublication);
+    }
+
+    public void returnPublication(Publication publication) {
+        publication.returnItem();
+        checkedOutPublications.removeIf(checkedOutPublication -> checkedOutPublication[0] == publication.getPublicationId());
+    }
+
+    // Generate unique IDs for Authors, Patrons, and Publications
+    public static int generatePublicationId()  {
         int temp = publicationID;
         publicationID++;
+        return temp;
+    }
+
+    public static int generateAuthorId()  {
+        int temp = authorID;
+        authorID++;
+        return temp;
+    }
+
+    public static int generatePatronId()  {
+        int temp = patronID;
+        patronID++;
         return temp;
     }
         
