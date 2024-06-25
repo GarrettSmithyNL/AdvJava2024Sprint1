@@ -1,6 +1,6 @@
 package LibraryItems;
 
-public abstract class Publication implements Borrowable {
+public abstract class Publication {
   private String title;
   private Author author;
   private String publisher;
@@ -45,5 +45,8 @@ public abstract class Publication implements Borrowable {
     this.status = status;
   }
 
+  public void checkoutPublication() {
+
+  }
 
 }

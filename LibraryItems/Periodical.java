@@ -1,11 +1,15 @@
+package LibraryItems;
+
 public abstract class Periodical extends  Publication {
-  private int periodicalId = 0;
+  private static int nextPeriodicalId = 0;
+  private int periodicalId;
   private int issueNum;
 
   public Periodical(String title, Author author, String publisher, int issueNum) {
     super(title, author, publisher);
     this.issueNum = issueNum;
-    periodicalId++;
+    nextPeriodicalId++;
+    this.periodicalId = nextPeriodicalId;
   }
 
   public int getPeriodicalId() {
