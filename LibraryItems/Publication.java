@@ -1,7 +1,7 @@
 package LibraryItems;
 import Authors.Author;
 
-public abstract class Publication {
+public abstract class Publication implements Borrowable{
   private String title;
   private Author author;
   private String publisher;
@@ -54,5 +54,13 @@ public abstract class Publication {
 
   public int getPublicationId() {
     return publicationId;
+  }
+
+  public void borrowItem() {
+    this.setStatus(Status.CHECKED_OUT);
+  }
+
+  public void returnItem() {
+    this.setStatus(Status.AVAILABLE);
   }
 }

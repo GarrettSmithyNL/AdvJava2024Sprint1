@@ -4,7 +4,7 @@ public class Student extends Patron {
     private String studentID;
     private String school;
 
-    public Student(String patronID, String name, String address, String phone, String studentID, String school) {
+    public Student(int patronID, String name, String address, String phone, String studentID, String school) {
         super(patronID, name, address, phone);
         this.studentID = studentID;
         this.school = school;
