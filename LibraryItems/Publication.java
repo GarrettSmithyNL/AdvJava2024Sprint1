@@ -1,16 +1,19 @@
 package LibraryItems;
+import Authors.Author;
 
 public abstract class Publication {
   private String title;
   private Author author;
   private String publisher;
   private Status status;
+  private int publicationId;
 
-  public Publication(String title, Author author, String publisher) {
+  public Publication(String title, Author author, String publisher, int publicationId) {
     this.title = title;
     this.author = author;
     this.publisher = publisher;
     this.status = Status.AVAILABLE;
+    this.publicationId = publicationId;
   }
 
   public String getTitle() {
@@ -49,4 +52,7 @@ public abstract class Publication {
 
   }
 
+  public int getPublicationId() {
+    return publicationId;
+  }
 }
