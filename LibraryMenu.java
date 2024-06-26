@@ -1,11 +1,21 @@
+
 import java.util.Scanner;
-import java.util.List;
 
 import Authors.Author;
-import Patrons.*;
-import LibraryItems.*;
+import LibraryItems.BookAudio;
+import LibraryItems.BookElectronic;
+import LibraryItems.BookPrinted;
+import LibraryItems.PeriodicalElectronic;
+import LibraryItems.PeriodicalPrinted;
+import LibraryItems.Publication;
+import Patrons.Employee;
+import Patrons.Patron;
+import Patrons.Student;
+
+
 
 public class LibraryMenu {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -177,6 +187,7 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 2:
+
                                 String newTitle, newAuthorName, newPublisher, newISBN, nwevoicedBy;
                                 int newNumOfPages, newDuration, newIssueNum;
                                 Author newAuthor;
@@ -291,6 +302,23 @@ public class LibraryMenu {
                                             break; 
                                     }
                                 }
+                                System.out.println("Which item would you like to edit?");
+                                System.out.println("2. BookElectronic");
+                                System.out.println("3. BookAudio");
+                                System.out.println("4. PeriodicalPrinted");
+                                System.out.println("5. PeriodicalElectronic");
+                                int editTypeOption = scanner.nextInt();
+                                String title, authorName, publisher, ISBN, voicedBy;
+                                int numOfPages, duration, issueNum;
+                                Author author;
+
+                                switch (editTypeOption) {
+                                    System.out.println("What is the title of the book?");
+                                }
+                                
+                                
+
+
                                 break;
                             case 3:
                                 System.out.println("What is the title of the item you would like to edit?");
@@ -535,7 +563,7 @@ public class LibraryMenu {
                     }
                     break;
                 case 5:
-                    while (true) {
+                    while (true) { // Return a Library Item
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Return a Library Item");
                         System.out.println("2. Go Back");
@@ -564,7 +592,7 @@ public class LibraryMenu {
                     }
                     break;
                 case 6:
-                    while (true) {
+                    while (true) { // Search for a Library Item by Title, Author, or ISBN
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Search for a Library Item by Title");
                         System.out.println("2. Search for a Library Item by Author");
@@ -574,10 +602,21 @@ public class LibraryMenu {
                         int searchOption = scanner.nextInt();
 
                         switch (searchOption) {
-                            case 1:
-                                System.out.println("Searching for a library item by title...");
-                                // Add logic to search for a library item by title
+                            case 1: // Search by Title
+                                System.out.println("Search for a library item by title");
+                                System.out.println("Enter the title of the publication you would like to search for: ");
+                                String title = scanner.nextLine();
+
+                                if (library.getPublication(title) == null) {
+                                    System.out.println("Publication not found.");
+                                } else {
+                                    Publication publication = library.getPublication(title);
+                                    System.out.println("Publication found:");
+                                    System.out.println(publication);
+                                }
+                                
                                 break;
+
                             case 2:
                                 System.out.println("What is the name of the author you would like to search for?");
                                 Author author = library.getAuthor(scanner.nextLine());
@@ -591,8 +630,26 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 3:
+
+
+                            case 2: // Search by Author
+                                System.out.println("Search for a library item by author.");
+                                break;
+
+                            case 3: // Search by ISBN
+
                                 System.out.println("Searching for a library item by ISBN...");
-                                // Add logic to search for a library item by ISBN
+                                System.out.println("Enter the ISBN of the publication you would like to search for: ");
+                                String isbn = scanner.nextLine();
+
+                                Publication publication = library.getPublicationByISBN(isbn);
+                                if (publication == null) {
+                                    System.out.println("Publication not found.");
+                                } else {
+                                    System.out.println("Publication found:");
+                                    System.out.println(publication);
+                                }
+
                                 break;
                             case 4:
                                 System.out.println("Press 4 to go back to the main menu.");

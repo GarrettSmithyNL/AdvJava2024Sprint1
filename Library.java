@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Authors.Author;
-import LibraryItems.*;
+import LibraryItems.Book;
+import LibraryItems.Publication;
 import Patrons.Patron;
 
 public class Library {
@@ -103,7 +104,21 @@ public class Library {
         patronID++;
         return temp;
     }
+<<<<<<< HEAD
     
+=======
+        
+
+
+    // Helper method to find publication by ID
+    private Publication findPublicationByID(String publicationID) {
+        // This method should find and return a Publication object by its ID.
+        // Implementation depends on how publications are stored in the library.
+        // Assuming a list or map of publications exists.
+        return null; // Replace with actual implementation.
+    }
+>>>>>>> aaf3a89 (Added search by ISBN and Title)
+
 
     // Getters for the lists
     public Author getAuthor(String authorName) {
@@ -145,3 +160,21 @@ public class Library {
 }
 
 
+    public Publication getPublication(String publicationName) {
+       for (Publication publication : publications) {
+           if (publication.getTitle().equalsIgnoreCase(publicationName)) {
+               return publication;
+           }
+       }
+    }
+
+    public Publication getPublicationByISBN(String isbn) {
+        for (Publication publication : publications) {
+            if (((Book)publication).getISBN().equalsIgnoreCase(isbn)) {
+                return publication;
+            }
+        }
+        return null;
+     }
+
+ 
