@@ -1,0 +1,24 @@
+1.) Manage libray items
+      a.) add items   -G
+          i) ask what type of item
+      b.) edit items
+      c.) remove items
+      d.) return to main menu
+2.) manage authors
+      a.) add author  -G
+      b.) edit author
+      c.) remove author
+      d.) return to main menu
+3.) manage patrons
+      a.) add patron  -G
+          i) ask what type of patron
+      b.) edit patron
+      c.) remove patron
+      d.) return to main menu
+4.) handling borrowing of lib items
+5.) handle return of items
+6.) search for items
+      a.) title
+      b.) authors
+      c.) ISBN
+7.) exit

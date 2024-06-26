@@ -3,14 +3,14 @@ package Patrons;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Patron {
-    private String patronID;
+public class Patron {
+    private int patronID;
     private String name;
     private String address;
     private String phone;
     private List<String> borrowedItems;
 
-    public Patron(String patronID, String name, String address, String phone) {
+    public Patron(int patronID, String name, String address, String phone) {
         this.patronID = patronID;
         this.name = name;
         this.address = address;
@@ -19,11 +19,11 @@ public abstract class Patron {
     }
 
     // Getters and setters
-    public String getPatronID() {
+    public int getPatronID() {
         return patronID;
     }
 
-    public void setPatronID(String patronID) {
+    public void setPatronID(int patronID) {
         this.patronID = patronID;
     }
 
@@ -61,6 +61,12 @@ public abstract class Patron {
 
     public void returnItem(String itemID) {
         this.borrowedItems.remove(itemID);
+    }
+
+    public static void editPatron(Patron patron, String newName, String newAddress, String newPhone) {
+        patron.setName(newName);
+        patron.setAddress(newAddress);
+        patron.setPhone(newPhone);
     }
 }
 

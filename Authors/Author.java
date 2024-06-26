@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Author {
-    private String authorID;
+    private int authorID;
     private String name;
     private String dateOfBirth;
     private List<String> publicationsWritten;
 
-    public Author(String authorID, String name, String dateOfBirth) {
+    public Author(int authorID, String name, String dateOfBirth) {
         this.authorID = authorID;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -17,11 +17,11 @@ public class Author {
     }
 
     // Getters and setters
-    public String getAuthorID() {
+    public int getAuthorID() {
         return authorID;
     }
 
-    public void setAuthorID(String authorID) {
+    public void setAuthorID(int authorID) {
         this.authorID = authorID;
     }
 

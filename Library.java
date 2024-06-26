@@ -2,29 +2,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Authors.Author;
-import LibraryItems.*;
+import LibraryItems.Book;
+import LibraryItems.Publication;
 import Patrons.Patron;
 
 public class Library {
+    // Static variables to keep track of the next ID to assign to a new Author, Patron, or Publication
     private static int publicationID = 1;
+    private static int authorID = 1;
+    private static int patronID = 1;
+    // Lists to store the Authors, Patrons, Publications, and checked out Publications
     private final List<Author> authors;
     private final List<Patron> patrons;
     private final List<Publication> publications;
+    private final List<int[]> checkedOutPublications;
 
+    // Constructor to initialize the lists
     public Library() {
         this.authors = new ArrayList<>();
         this.patrons = new ArrayList<>();
         this.publications = new ArrayList<>();
+        this.checkedOutPublications = new ArrayList<>();
     }
 
-    // Author management methods
+    // add, edit, and remove Author methods
     public void addAuthor(Author author) {
         authors.add(author);
     }
 
-    public void editAuthor(String authorID, String newName, String newDateOfBirth) {
+    public void editAuthor(int authorid, String newName, String newDateOfBirth) {
         for (Author author : authors) {
-            if (author.getAuthorID().equals(authorID)) {
+            if (author.getAuthorID() == authorid){
                 author.setName(newName);
                 author.setDateOfBirth(newDateOfBirth);
                 break;
@@ -32,18 +40,18 @@ public class Library {
         }
     }
 
-    public void removeAuthor(String authorID) {
-        authors.removeIf(author -> author.getAuthorID().equals(authorID));
+    public void removeAuthor(Author author) {
+        authors.remove(author);
     }
 
-    // Patron management methods
+    // add, edit, and remove Patron methods
     public void addPatron(Patron patron) {
         patrons.add(patron);
     }
 
-    public void editPatron(String patronID, String newName, String newAddress, String newPhone) {
+    public void editPatron(int patronid, String newName, String newAddress, String newPhone) {
         for (Patron patron : patrons) {
-            if (patron.getPatronID().equals(patronID)) {
+            if (patron.getPatronID() == patronid) {
                 patron.setName(newName);
                 patron.setAddress(newAddress);
                 patron.setPhone(newPhone);
@@ -52,77 +60,98 @@ public class Library {
         }
     }
 
-    public void removePatron(String patronID) {
-        patrons.removeIf(patron -> patron.getPatronID().equals(patronID));
+    public void removePatron(Patron patron) {
+        patrons.remove(patron);
     }
 
 
-    // Publication management methods
-
-    //create publication
+    // add, edit, and remove Publication methods
     public void addPublication(Publication publication) {
         publications.add(publication);
-    }
-
-    public void editPublicaiton(int publicationID, String newTitle, Author newAuthor, String newPublisher, String newISBN, int newIssueNum, int newNumOfCopies, int newNumOfPages, int newDurationSeconds, String newVoicedBy) {
-        for (Publication publication : publications) {
-            if (publication.getPublicationId() == publicationID) {
-                switch (publication.getClass().getName()) {
-                    case "BookPrinted":
-                        BookPrinted.editPublication((BookPrinted) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfCopies, newNumOfPages);
-                        break;
-                    case "BookAudio":
-                        BookAudio.editPublication((BookAudio) publication, newTitle, newAuthor, newPublisher, newISBN, newDurationSeconds, newVoicedBy);
-                        break;
-                    case "BookElectronic":
-                        BookElectronic.editPublication((BookElectronic) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
-                        break;
-                    case "PeriodicalPrinted":
-                        PeriodicalPrinted.editPublication((PeriodicalPrinted) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfCopies, newNumOfPages);
-                        break;
-                    case "PeriodicalElectronic":
-                        PeriodicalElectronic.editPublication((PeriodicalElectronic) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
-                        break;
-                }  
-            }
-        }
     }
 
     public void removePublication(Publication publication) {
         publications.remove(publication);
     }
 
-    public static int generateID()  {
+    // Methods to take out and return Publications
+    public void takeOutPublication(Publication publication, Patron patron) {
+        publication.borrowItem();
+        int[] checkedOutPublication = {publication.getPublicationId(), patron.getPatronID()};
+        checkedOutPublications.add(checkedOutPublication);
+    }
+
+    public void returnPublication(Publication publication) {
+        publication.returnItem();
+        checkedOutPublications.removeIf(checkedOutPublication -> checkedOutPublication[0] == publication.getPublicationId());
+    }
+
+    // Generate unique IDs for Authors, Patrons, and Publications
+    public static int generatePublicationId()  {
         int temp = publicationID;
         publicationID++;
         return temp;
     }
-        
-    // Method to search publications
-    public List<Publication> searchPublications(String query) {
-        List<Publication> results = new ArrayList<>();
-        for (Author author : authors) {
-            for (String publicationID : author.getPublicationsWritten()) {
-                Publication publication = findPublicationByID(publicationID);
-                if (publication != null) {
-                    if (publication.getTitle().equalsIgnoreCase(query) ||
-                            publication.getAuthor().getName().equalsIgnoreCase(query) ||
-                            (publication instanceof Book && ((Book) publication).getISBN().equalsIgnoreCase(query))) {
-                        results.add(publication);
-                    }
-                }
-            }
-        }
-        return results;
+
+    public static int generateAuthorId()  {
+        int temp = authorID;
+        authorID++;
+        return temp;
     }
 
-    // Helper method to find publication by ID
-    private Publication findPublicationByID(String publicationID) {
-        // This method should find and return a Publication object by its ID.
-        // Implementation depends on how publications are stored in the library.
-        // Assuming a list or map of publications exists.
-        return null; // Replace with actual implementation.
+    public static int generatePatronId()  {
+        int temp = patronID;
+        patronID++;
+        return temp;
+    }
+
+    // Getters for the lists
+    public Author getAuthor(String authorName) {
+        for (Author author : authors) {
+            if (author.getName().equalsIgnoreCase(authorName)) {
+                return author;
+            }
+        }
+        return null;
+    }
+
+    public Patron getPatron(String patronName) {
+        for (Patron patron : patrons) {
+            if (patron.getName().equalsIgnoreCase(patronName)) {
+                return patron;
+            }
+        }
+        return null;
+    }
+
+    public Publication getPublication(String publicationTitle) {
+        for (Publication publication : publications) {
+            if (publication.getTitle().equalsIgnoreCase(publicationTitle)) {
+                return publication;
+            }
+        }
+        return null;
+    }
+
+    public List<Publication> getPublicationByAuthors(String authorName) {
+        List<Publication> publicationsByAuthor = new ArrayList<>();
+        for (Publication publication : publications) {
+            if (publication.getAuthor().getName().equalsIgnoreCase(authorName)) {
+                publicationsByAuthor.add(publication);
+            }
+        }
+        return publicationsByAuthor;    
+    }
+
+    public Publication getPublicationByISBN(String isbn) {
+        for (Publication publication : publications) {
+            if (((Book)publication).getISBN().equalsIgnoreCase(isbn)) {
+                return publication;
+            }
+        }
+        return null;
     }
 }
 
 
+ 
