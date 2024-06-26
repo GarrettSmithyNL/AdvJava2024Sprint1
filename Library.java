@@ -39,8 +39,8 @@ public class Library {
         }
     }
 
-    public void removeAuthor(int authorid) {
-        authors.removeIf(author -> author.getAuthorID() == authorid);
+    public void removeAuthor(Author author) {
+        authors.remove(author);
     }
 
     // add, edit, and remove Patron methods
@@ -59,8 +59,8 @@ public class Library {
         }
     }
 
-    public void removePatron(int patronid) {
-        patrons.removeIf(patron -> patron.getPatronID() == patronid);
+    public void removePatron(Patron patron) {
+        patrons.remove(patron);
     }
 
 
@@ -103,32 +103,7 @@ public class Library {
         patronID++;
         return temp;
     }
-        
-    // Method to search publications
-    public List<Publication> searchPublications(String query) {
-        List<Publication> results = new ArrayList<>();
-        for (Author author : authors) {
-            for (String publicationID : author.getPublicationsWritten()) {
-                Publication publication = findPublicationByID(publicationID);
-                if (publication != null) {
-                    if (publication.getTitle().equalsIgnoreCase(query) ||
-                            publication.getAuthor().getName().equalsIgnoreCase(query) ||
-                            (publication instanceof Book && ((Book) publication).getISBN().equalsIgnoreCase(query))) {
-                        results.add(publication);
-                    }
-                }
-            }
-        }
-        return results;
-    }
-
-    // Helper method to find publication by ID
-    private Publication findPublicationByID(String publicationID) {
-        // This method should find and return a Publication object by its ID.
-        // Implementation depends on how publications are stored in the library.
-        // Assuming a list or map of publications exists.
-        return null; // Replace with actual implementation.
-    }
+    
 
     // Getters for the lists
     public Author getAuthor(String authorName) {
@@ -138,6 +113,34 @@ public class Library {
             }
         }
         return null;
+    }
+
+    public Patron getPatron(String patronName) {
+        for (Patron patron : patrons) {
+            if (patron.getName().equalsIgnoreCase(patronName)) {
+                return patron;
+            }
+        }
+        return null;
+    }
+
+    public Publication getPublication(String publicationTitle) {
+        for (Publication publication : publications) {
+            if (publication.getTitle().equalsIgnoreCase(publicationTitle)) {
+                return publication;
+            }
+        }
+        return null;
+    }
+
+    public List<Publication> getPublicationByAuthors(String authorName) {
+        List<Publication> publicationsByAuthor = new ArrayList<>();
+        for (Publication publication : publications) {
+            if (publication.getAuthor().getName().equalsIgnoreCase(authorName)) {
+                publicationsByAuthor.add(publication);
+            }
+        }
+        return publicationsByAuthor;    
     }
 }
 

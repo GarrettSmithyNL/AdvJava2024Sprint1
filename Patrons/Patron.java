@@ -62,5 +62,11 @@ public class Patron {
     public void returnItem(String itemID) {
         this.borrowedItems.remove(itemID);
     }
+
+    public static void editPatron(Patron patron, String newName, String newAddress, String newPhone) {
+        patron.setName(newName);
+        patron.setAddress(newAddress);
+        patron.setPhone(newPhone);
+    }
 }
 

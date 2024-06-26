@@ -26,4 +26,12 @@ public class Student extends Patron {
     public void setSchool(String school) {
         this.school = school;
     }
+
+    public static void editPatron(Student student, String newName, String newAddress, String newPhone, String newStudentID, String newSchool) {
+        student.setName(newName);
+        student.setAddress(newAddress);
+        student.setPhone(newPhone);
+        student.setStudentID(newStudentID);
+        student.setSchool(newSchool);
+    }
 }

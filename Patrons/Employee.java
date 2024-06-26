@@ -1,5 +1,8 @@
 package Patrons;
 
+import Authors.Author;
+import LibraryItems.BookAudio;
+
 public class Employee extends Patron {
     private String employeeID;
     private String jobTitle;
@@ -25,5 +28,13 @@ public class Employee extends Patron {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    public static void editPatron(Employee employee, String newName, String newAddress, String newPhone, String newEmployeeID, String newJobTitle) {
+        employee.setName(newName);
+        employee.setAddress(newAddress);
+        employee.setPhone(newPhone);
+        employee.setEmployeeID(newEmployeeID);
+        employee.setJobTitle(newJobTitle);
     }
 }
