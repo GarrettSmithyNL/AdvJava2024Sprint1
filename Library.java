@@ -2,13 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Authors.Author;
-import LibraryItems.Book;
-import LibraryItems.BookAudio;
-import LibraryItems.BookElectronic;
-import LibraryItems.BookPrinted;
-import LibraryItems.PeriodicalElectronic;
-import LibraryItems.PeriodicalPrinted;
-import LibraryItems.Publication;
+import LibraryItems.*;
 import Patrons.Patron;
 
 public class Library {
@@ -75,30 +69,6 @@ public class Library {
         publications.add(publication);
     }
 
-    public void editPublicaiton(int publicationID, String newTitle, Author newAuthor, String newPublisher, String newISBN, int newIssueNum, int newNumOfCopies, int newNumOfPages, int newDurationSeconds, String newVoicedBy) {
-        for (Publication publication : publications) {
-            if (publication.getPublicationId() == publicationID) {
-                switch (publication.getClass().getName()) {
-                    case "BookPrinted":
-                        BookPrinted.editPublication((BookPrinted) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
-                        break;
-                    case "BookAudio":
-                        BookAudio.editPublication((BookAudio) publication, newTitle, newAuthor, newPublisher, newISBN, newDurationSeconds, newVoicedBy);
-                        break;
-                    case "BookElectronic":
-                        BookElectronic.editPublication((BookElectronic) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
-                        break;
-                    case "PeriodicalPrinted":
-                        PeriodicalPrinted.editPublication((PeriodicalPrinted) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
-                        break;
-                    case "PeriodicalElectronic":
-                        PeriodicalElectronic.editPublication((PeriodicalElectronic) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
-                        break;
-                }  
-            }
-        }
-    }
-
     public void removePublication(Publication publication) {
         publications.remove(publication);
     }
@@ -158,6 +128,16 @@ public class Library {
         // Implementation depends on how publications are stored in the library.
         // Assuming a list or map of publications exists.
         return null; // Replace with actual implementation.
+    }
+
+    // Getters for the lists
+    public Author getAuthor(String authorName) {
+        for (Author author : authors) {
+            if (author.getName().equalsIgnoreCase(authorName)) {
+                return author;
+            }
+        }
+        return null;
     }
 }
 
