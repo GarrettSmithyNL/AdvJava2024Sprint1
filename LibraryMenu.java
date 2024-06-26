@@ -1,7 +1,9 @@
 import java.util.Scanner;
 
 import Authors.Author;
-import LibraryItems.Publication;
+import Patrons.*;
+import LibraryItems.*;
+
 public class LibraryMenu {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -42,10 +44,129 @@ public class LibraryMenu {
                         switch (itemOption) {
                             case 1:
                                 System.out.println("Which type item would you like to add?");
+
+
+                                System.out.println("1. BookPrinted");
+                                System.out.println("2. BookElectronic");
+                                System.out.println("3. BookAudio");
+                                System.out.println("4. PeriodicalPrinted");
+                                System.out.println("5. PeriodicalElectronic");
+                                int typeOption = scanner.nextInt();
+                                String title, authorName, publisher, ISBN, voicedBy;
+                                int numOfPages, duration, issueNum;
+                                Author author;
+                                switch (typeOption) {
+                                    case 1:  //BookPrinted
+                                        System.out.println("What is the title of the book?");
+                                        title = scanner.nextLine();
+                                        System.out.println("Who is the author of the book?");
+                                        authorName = scanner.nextLine();
+                                        if (library.getAuthor(authorName) == null) {
+                                            System.out.println("Author not found. Please add the author first.");
+                                            break;
+                                        } else {
+                                            author = library.getAuthor(authorName);
+                                        }
+                                        System.out.println("Who is the publisher of the book?");
+                                        publisher = scanner.nextLine();
+                                        System.out.println("What is the ISBN of the book?");
+                                        ISBN = scanner.nextLine();
+                                        System.out.println("How many pages does the book have?");
+                                        numOfPages = scanner.nextInt();
+                                        library.addPublication(new BookPrinted(title, author, publisher, Library.generatePublicationId(), ISBN, numOfPages));
+                                        System.out.println("Book added successfully!");
+                                        break;
+                                    case 2:  //BookElectronic
+                                        System.out.println("What is the title of the book?");
+                                        title = scanner.nextLine();
+                                        System.out.println("Who is the author of the book?");
+                                        authorName = scanner.nextLine();
+                                        // Check if author exists in the library
+                                        if (library.getAuthor(authorName) == null) {
+                                            System.out.println("Author not found. Please add the author first.");
+                                            break;
+                                        } else {
+                                            author = library.getAuthor(authorName);
+                                        }
+                                        System.out.println("Who is the publisher of the book?");
+                                        publisher = scanner.nextLine();
+                                        System.out.println("What is the ISBN of the book?");
+                                        ISBN = scanner.nextLine();
+                                        System.out.println("How many pages does the book have?");
+                                        numOfPages = scanner.nextInt();
+                                        library.addPublication(new BookElectronic(title, author, publisher, Library.generatePublicationId(), ISBN, numOfPages));
+                                        System.out.println("Book added successfully!");
+                                        break;
+                                    case 3:  //BookAudio
+                                        System.out.println("What is the title of the book?");
+                                        title = scanner.nextLine();
+                                        System.out.println("Who is the author of the book?");
+                                        authorName = scanner.nextLine();
+                                        if (library.getAuthor(authorName) == null) {
+                                            System.out.println("Author not found. Please add the author first.");
+                                            break;
+                                        } else {
+                                            author = library.getAuthor(authorName);
+                                        }
+                                        System.out.println("Who is the publisher of the book?");
+                                        publisher = scanner.nextLine();
+                                        System.out.println("What is the ISBN of the book?");
+                                        ISBN = scanner.nextLine();
+                                        System.out.println("What is the duration of the book in seconds?");
+                                        duration = scanner.nextInt();
+                                        System.out.println("Who is the narrator of the book?");
+                                        voicedBy = scanner.nextLine();
+                                        library.addPublication(new BookAudio(title, author, publisher, Library.generatePublicationId(), ISBN, duration, voicedBy));
+                                        System.out.println("Book added successfully!");
+                                        break;
+                                    case 4:  //PeriodicalPrinted
+                                        System.out.println("What is the title of the book?");
+                                        title = scanner.nextLine();
+                                        System.out.println("Who is the author of the book?");
+                                        authorName = scanner.nextLine();
+                                        if (library.getAuthor(authorName) == null) {
+                                            System.out.println("Author not found. Please add the author first.");
+                                            break;
+                                        } else {
+                                            author = library.getAuthor(authorName);
+                                        }
+                                        System.out.println("Who is the publisher of the book?");
+                                        publisher = scanner.nextLine();
+                                        System.out.println("What is the issue number of the book?");
+                                        issueNum = scanner.nextInt();
+                                        System.out.println("How many pages does the book have?");
+                                        numOfPages = scanner.nextInt();
+                                        library.addPublication(new PeriodicalPrinted(title, author, publisher, Library.generatePublicationId(), issueNum, numOfPages));
+                                        System.out.println("Periodical added successfully!");
+                                        break;
+                                    case 5:  //PeriodicalElectronic
+                                        System.out.println("What is the title of the book?");
+                                        title = scanner.nextLine();
+                                        System.out.println("Who is the author of the book?");
+                                        authorName = scanner.nextLine();
+                                        // Check if author exists in the library
+                                        if (library.getAuthor(authorName) == null) {
+                                            System.out.println("Author not found. Please add the author first.");
+                                            break;
+                                        } else {
+                                            author = library.getAuthor(authorName);
+                                        }
+                                        System.out.println("Who is the publisher of the book?");
+                                        publisher = scanner.nextLine();
+                                        System.out.println("What is the issue number of the book?");
+                                        issueNum = scanner.nextInt();
+                                        System.out.println("How many pages does the book have?");
+                                        numOfPages = scanner.nextInt();
+                                        library.addPublication(new PeriodicalElectronic(title, author, publisher, Library.generatePublicationId(), issueNum, numOfPages));
+                                        System.out.println("Book added successfully!");
+                                        break;
+                                }
+
                                 break;
 
                             case 2:
                                 System.out.println("Which item would you like to edit?");
+
                                 System.out.println("Please enter the publication ID of the publication you would like to edit.");
                                 publicationID = scanner.nextInt();
 
@@ -78,6 +199,7 @@ public class LibraryMenu {
                                 newVoicedBy = scanner.nextLine();
                                 
                                 library.editPublication(publicationID, newTitle, newAuthor, newPublisher, newISBN, newIssueNum, newNumOfCopies, newNumOfPages, newDurationSeconds, newVoicedBy);
+
 
                                 break;
 
@@ -112,15 +234,28 @@ public class LibraryMenu {
                         int authorOption = scanner.nextInt();
                         scanner.nextLine();
 
+
                         int authorID;
                         String newName, newDateOfBirth;
                        
                         switch (authorOption) {
                             case 1:
                                 System.out.println("Add a new author");      
+
+                        String name, dateOfBirth;
+                        switch (authorOption) {
+                            case 1:
+                                System.out.println("What is the name of the author?");
+                                name = scanner.nextLine();
+                                System.out.println("What is the date of birth of the author?");
+                                dateOfBirth = scanner.nextLine();
+                                library.addAuthor(new Author(Library.generateAuthorId(), name, dateOfBirth));
+                                System.out.println("Author added successfully!");                                
+
                                 break;
 
                             case 2:
+
                                 System.out.println("Edit an existing author");
                                 System.out.println("Please enter the author ID of the author you would like to edit.");
                                 authorID = scanner.nextInt();
@@ -133,9 +268,11 @@ public class LibraryMenu {
                                 newDateOfBirth = scanner.nextLine();
 
                                 library.editAuthor(authorID, newName,newDateOfBirth);
+
                                 break;
 
                             case 3:
+
                                 System.out.println("Delete an existing author");
                                 System.out.println("Please enter the author ID of the author you would like to delete.");
                                 
@@ -143,14 +280,13 @@ public class LibraryMenu {
                                 library.removeAuthor(authorID);
 
                                 System.out.println("Author with ID " + authorID +" has been deleted.");
+
                                 break;
 
                             case 4:
-                                System.out.println("Press 4 to go back to the main menu.");
                                 break;
 
                             default:
-                                System.out.println("Invalid choice. Please enter a number between 1 and 4.");
                                 continue;
                             }
                         break;
@@ -167,15 +303,67 @@ public class LibraryMenu {
                         int patronOption = scanner.nextInt();
                         scanner.nextLine();
 
+
                         int patronID;
                         String name, address, phone;
                         switch (patronOption) {
                             case 1:
                                 System.out.println("Add a new patron");                     
+
+                        String name, address, phone, employeeId, jobTitle, studentId, school;
+                        switch (patronOption) {
+                            case 1:
+                                System.out.println("What type of patron would you like to add?");
+                                System.out.println("1. Student");
+                                System.out.println("2. Employee");
+                                System.out.println("3. Regular");
+                                int typeOption = scanner.nextInt();
+                                switch (typeOption) {
+                                    case 1:
+                                        System.out.println("What is the name of the student?");
+                                        name = scanner.nextLine();
+                                        System.out.println("What is the address of the student?");
+                                        address = scanner.nextLine();
+                                        System.out.println("What is the phone number of the student?");
+                                        phone = scanner.nextLine();
+                                        System.out.println("What is the student ID of the student?");
+                                        studentId = scanner.nextLine();
+                                        System.out.println("What is the school of the student?");
+                                        school = scanner.nextLine();
+                                        library.addPatron(new Student(Library.generatePatronId(), name, address, phone, studentId, school));
+                                        System.out.println("Student added successfully!");
+                                        break;
+                                    case 2:
+                                        System.out.println("What is the name of the employee?");
+                                        name = scanner.nextLine();
+                                        System.out.println("What is the address of the employee?");
+                                        address = scanner.nextLine();
+                                        System.out.println("What is the phone number of the employee?");
+                                        phone = scanner.nextLine();
+                                        System.out.println("What is the employee ID of the employee?");
+                                        employeeId = scanner.nextLine();
+                                        System.out.println("What is the job title of the employee?");
+                                        jobTitle = scanner.nextLine();
+                                        library.addPatron(new Employee(Library.generatePatronId(), name, address, phone, employeeId, jobTitle));
+                                        System.out.println("Employee added successfully!");
+                                        break;
+                                    case 3:
+                                        System.out.println("What is the name of the patron?");
+                                        name = scanner.nextLine();
+                                        System.out.println("What is the address of the patron?");
+                                        address = scanner.nextLine();
+                                        System.out.println("What is the phone number of the patron?");
+                                        phone = scanner.nextLine();
+                                        library.addPatron(new Patron(Library.generatePatronId(), name, address, phone));
+                                        System.out.println("Patron added successfully!");
+                                        break;
+                                }
+
                                 break;
 
                             case 2:
                                 System.out.println("Edit an existing patron");
+
                                 System.out.println("Please enter the patron ID of the patron you would like to edit.");
                                 patronID = scanner.nextInt();
 
@@ -190,10 +378,12 @@ public class LibraryMenu {
                                 phone = scanner.nextLine();
 
                                 library.editPatron(patronID, name, address, phone);
+
                                 break;
 
                             case 3:
                                 System.out.println("Delete an existing patron");
+
                                 System.out.println("Please enter the patron ID of the patron you would like to delete.");
                                 patronID = scanner.nextInt();
 
