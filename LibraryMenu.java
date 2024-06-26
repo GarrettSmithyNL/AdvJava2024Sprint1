@@ -18,10 +18,14 @@ import Patrons.Student;
 public class LibraryMenu {
 
     public static void main(String[] args) {
+        // Set up Scanner
         Scanner scanner = new Scanner(System.in);
+        // Set up running loop for the menu
         boolean running = true;
-        
+        // Set up the library
         Library library = new Library();
+
+        // Add some authors, publications, and patrons to the library
         Author author1 = new Author(Library.generateAuthorId(), "J.K. Rowling", "July 31, 1965");
         Author author2 = new Author(Library.generateAuthorId(), "Stephen King", "September 21, 1947");
         library.addAuthor(author1);
@@ -41,7 +45,7 @@ public class LibraryMenu {
         library.addPatron(new Employee(Library.generatePatronId(), "Jane Doe", "456 Elm St", "555-555-5556", "654321", "Librarian"));
         library.addPatron(new Patron(Library.generatePatronId(), "Alice Smith", "789 Oak St", "555-555-5557"));
 
-        
+        // Main menu loop
         while (running) {
             System.out.println("Welcome to the Library Management System");
             System.out.println("1. Manage Library Items");
@@ -59,6 +63,7 @@ public class LibraryMenu {
             switch (option) {
                 case 1:
                     while (true) {
+                        // Manage Library Items
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Add Item");
                         System.out.println("2. Edit An Existing Item");
@@ -70,6 +75,7 @@ public class LibraryMenu {
                         
                         switch (itemOption) {
                             case 1:
+                                // Add Item
                                 System.out.println("Which type item would you like to add?");
                                 System.out.println("1. BookPrinted");
                                 System.out.println("2. BookElectronic");
@@ -83,7 +89,8 @@ public class LibraryMenu {
                                 Author author;
                                 Publication publication;
                                 switch (typeOption) {
-                                    case 1:  //BookPrinted
+                                    case 1:  
+                                        //BookPrinted
                                         System.out.println("What is the title of the book?");
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
@@ -103,7 +110,8 @@ public class LibraryMenu {
                                         library.addPublication(new BookPrinted(title, author, publisher, Library.generatePublicationId(), ISBN, numOfPages));
                                         System.out.println("Book added successfully!");
                                         break;
-                                    case 2:  //BookElectronic
+                                    case 2:  
+                                        //BookElectronic
                                         System.out.println("What is the title of the book?");
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
@@ -123,7 +131,8 @@ public class LibraryMenu {
                                         library.addPublication(new BookElectronic(title, author, publisher, Library.generatePublicationId(), ISBN, numOfPages));
                                         System.out.println("Book added successfully!");
                                         break;
-                                    case 3:  //BookAudio
+                                    case 3:  
+                                        //BookAudio
                                         System.out.println("What is the title of the book?");
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
@@ -145,7 +154,8 @@ public class LibraryMenu {
                                         library.addPublication(new BookAudio(title, author, publisher, Library.generatePublicationId(), ISBN, duration, voicedBy));
                                         System.out.println("Book added successfully!");
                                         break;
-                                    case 4:  //PeriodicalPrinted
+                                    case 4:  
+                                        //PeriodicalPrinted
                                         System.out.println("What is the title of the book?");
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
@@ -165,7 +175,8 @@ public class LibraryMenu {
                                         library.addPublication(new PeriodicalPrinted(title, author, publisher, Library.generatePublicationId(), issueNum, numOfPages));
                                         System.out.println("Periodical added successfully!");
                                         break;
-                                    case 5:  //PeriodicalElectronic
+                                    case 5:  
+                                        //PeriodicalElectronic
                                         System.out.println("What is the title of the book?");
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
@@ -188,6 +199,7 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 2:
+                                // Edit An Existing Item
                                 String newTitle, newAuthorName, newPublisher, newISBN, newVoicedBy;
                                 int newNumOfPages, newDuration, newIssueNum;
                                 Author newAuthor;
@@ -200,6 +212,7 @@ public class LibraryMenu {
                                 } else {
                                     switch (newPublication.getClass().getSimpleName()) {
                                         case "BookPrinted":
+                                            // BookPrinted
                                             System.out.println("What is the new title of the book?");
                                             newTitle = scanner.nextLine();
                                             System.out.println("Who is the new author of the book?");
@@ -220,6 +233,7 @@ public class LibraryMenu {
                                             System.out.println("Book edited successfully!");
                                             break;
                                         case "BookElectronic":
+                                            // BookElectronic
                                             System.out.println("What is the new title of the book?");
                                             newTitle = scanner.nextLine();
                                             System.out.println("Who is the new author of the book?");
@@ -240,6 +254,7 @@ public class LibraryMenu {
                                             System.out.println("Book edited successfully!");
                                             break;
                                         case "BookAudio":
+                                            // BookAudio
                                             System.out.println("What is the new title of the book?");
                                             newTitle = scanner.nextLine();
                                             System.out.println("Who is the new author of the book?");
@@ -262,6 +277,7 @@ public class LibraryMenu {
                                             System.out.println("Book edited successfully!");
                                             break;
                                         case "PeriodicalPrinted":
+                                            // PeriodicalPrinted
                                             System.out.println("What is the new title of the periodcial?");
                                             newTitle = scanner.nextLine();
                                             System.out.println("Who is the new author of the periodical?");
@@ -282,6 +298,7 @@ public class LibraryMenu {
                                             System.out.println("Periodical edited successfully!");
                                             break;
                                         case "PeriodicalElectronic":
+                                            // PeriodicalElectronic
                                             System.out.println("What is the new title of the periodcial?");
                                             newTitle = scanner.nextLine();
                                             System.out.println("Who is the new author of the periodical?");
@@ -308,6 +325,7 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 3:
+                                // Delete An Item
                                 System.out.println("What is the title of the item you would like to edit?");
                                 publication = library.getPublication(scanner.nextLine());
                                 if (publication == null) {
@@ -319,7 +337,8 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 4:
-                                System.out.println("Press 4 to go back to the main menu.");
+                                // Go back to the main menu
+                                System.out.println("Going back to the main menu.");
                                 break;
                             default:
                                 System.out.println("Invalid choice. Please enter a number between 1 and 4.");
@@ -329,6 +348,7 @@ public class LibraryMenu {
                         }
                     break;
                 case 2:
+                    // Manage Authors
                     while (true) {
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Add Author");
@@ -341,6 +361,7 @@ public class LibraryMenu {
                         String name, dateOfBirth;
                         switch (authorOption) {
                             case 1:
+                                // Add Author
                                 System.out.println("What is the name of the author?");
                                 name = scanner.nextLine();
                                 System.out.println("What is the date of birth of the author?");
@@ -349,6 +370,7 @@ public class LibraryMenu {
                                 System.out.println("Author added successfully!");                                
                                 break;
                             case 2:
+                                // Edit An Existing Author
                                 System.out.println("What is the name of the author you would like to edit?");
                                 Author author = library.getAuthor(scanner.nextLine());
                                 if (author == null) {
@@ -365,6 +387,7 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 3:
+                                // Delete An Author
                                 System.out.println("What is the name of the author you would like to delete?");
                                 Author authorToDelete = library.getAuthor(scanner.nextLine());
                                 if (authorToDelete == null) {
@@ -377,14 +400,18 @@ public class LibraryMenu {
 
                                 break;
                             case 4:
+                                // Go back to the main menu
+                                System.out.println("Going back to the main menu.");
                                 break;
                             default:
+                                System.out.println("Invalid choice. Please enter a number between 1 and 4.");
                                 continue;
                             }
                         break;
                     }
                     break;
                 case 3:
+                    // Manage Patrons
                     while (true) {
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Add Patron");
@@ -397,6 +424,7 @@ public class LibraryMenu {
                         String name, address, phone, employeeId, jobTitle, studentId, school;
                         switch (patronOption) {
                             case 1:
+                                // Add Patron
                                 System.out.println("What type of patron would you like to add?");
                                 System.out.println("1. Student");
                                 System.out.println("2. Employee");
@@ -405,6 +433,7 @@ public class LibraryMenu {
                                 scanner.nextLine();
                                 switch (typeOption) {
                                     case 1:
+                                        // Student
                                         System.out.println("What is the name of the student?");
                                         name = scanner.nextLine();
                                         System.out.println("What is the address of the student?");
@@ -419,6 +448,7 @@ public class LibraryMenu {
                                         System.out.println("Student added successfully!");
                                         break;
                                     case 2:
+                                        // Employee
                                         System.out.println("What is the name of the employee?");
                                         name = scanner.nextLine();
                                         System.out.println("What is the address of the employee?");
@@ -433,6 +463,7 @@ public class LibraryMenu {
                                         System.out.println("Employee added successfully!");
                                         break;
                                     case 3:
+                                        // Regular Patron
                                         System.out.println("What is the name of the patron?");
                                         name = scanner.nextLine();
                                         System.out.println("What is the address of the patron?");
@@ -445,6 +476,7 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 2:
+                                // Edit An Existing Patron
                                 System.out.println("Edit an existing patron");
                                 System.out.println("What is the name of the patron you would like to edit?");
                                 Patron patron = library.getPatron(scanner.nextLine());
@@ -454,6 +486,7 @@ public class LibraryMenu {
                                 } else {
                                     switch (patron.getClass().getSimpleName()) {
                                         case "Student":
+                                            // Student
                                             System.out.println("What is the new name of the student?");
                                             name = scanner.nextLine();
                                             System.out.println("What is the new address of the student?");
@@ -467,6 +500,7 @@ public class LibraryMenu {
                                             Student.editPatron((Student) patron, name, address, phone, studentId, school);
                                             break;
                                         case "Employee":
+                                            // Employee
                                             System.out.println("What is the new name of the employee?");
                                             name = scanner.nextLine();
                                             System.out.println("What is the new address of the employee?");
@@ -480,6 +514,7 @@ public class LibraryMenu {
                                             Employee.editPatron((Employee) patron, name, address, phone, employeeId, jobTitle);
                                             break;
                                         case "Patron":
+                                            // Regular Patron
                                             System.out.println("What is the new name of the patron?");
                                             name = scanner.nextLine();
                                             System.out.println("What is the new address of the patron?");
@@ -492,6 +527,7 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 3:
+                                // Delete An Patron
                                 System.out.println("What is the name of the patron you would like to delete?");
                                 Patron patronToDelete = library.getPatron(scanner.nextLine());
                                 if (patronToDelete == null) {
@@ -503,7 +539,8 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 4:
-                                System.out.println("Press 4 to go back to the main menu.");
+                                // Go back to the main menu
+                                System.out.println("Going back to the main menu.");
                                 break;
                             default:
                                 System.out.println("Invalid choice. Please enter a number between 1 and 4.");
@@ -513,6 +550,7 @@ public class LibraryMenu {
                     }
                     break;
                 case 4:
+                    // Borrow A Library Item
                     while (true) {
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Borrow a Library Item");
@@ -525,6 +563,7 @@ public class LibraryMenu {
 
                         switch (borrowOption) {
                             case 1:
+                                // Borrow a Library Item
                                 System.out.println("Who is the patron borrowing the item?");
                                 patron = library.getPatron(scanner.nextLine());
                                 if (patron == null) {
@@ -542,17 +581,18 @@ public class LibraryMenu {
                                 break;
                             case 2:
                                 // Go back to the main menu
-                                System.out.println("Press 2 to go back to the main menu.");
+                                System.out.println("Going back to the main menu.");
                                 break;
                             default:
-                                System.out.println("Invalid choice. Please enter a number between 1 and 3.");
+                                System.out.println("Invalid choice. Please enter a number between 1 and 2.");
                                 continue;
                             }
                         break;
                     }
                     break;
                 case 5:
-                    while (true) { // Return a Library Item
+                    // Return of A Library Item
+                    while (true) { 
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Return a Library Item");
                         System.out.println("2. Go Back");
@@ -562,6 +602,7 @@ public class LibraryMenu {
 
                         switch (returnOption) {
                             case 1:
+                                // Return a Library Item
                                 System.out.println("What is the title of the item the patron is returning?");
                                 Publication publication = library.getPublication(scanner.nextLine());
                                 if (publication == null) {
@@ -572,7 +613,8 @@ public class LibraryMenu {
                                 System.out.println("Publication returned successfully!");
                                 break;
                             case 2:
-                                System.out.println("Press 2 to go back to the main menu.");
+                                // Go back to the main menu
+                                System.out.println("Going back to the main menu.");
                                 break;
                             default:
                                 System.out.println("Invalid choice. Please enter a number between 1 and 2.");
@@ -582,7 +624,8 @@ public class LibraryMenu {
                     }
                     break;
                 case 6:
-                    while (true) { // Search for a Library Item by Title, Author, or ISBN
+                    // Search for a Library Item by Title, Author, or ISBN
+                    while (true) { 
                         System.out.println("Please Select which Method you would like to use");
                         System.out.println("1. Search for a Library Item by Title");
                         System.out.println("2. Search for a Library Item by Author");
@@ -593,7 +636,8 @@ public class LibraryMenu {
                         scanner.nextLine();
 
                         switch (searchOption) {
-                            case 1: // Search by Title
+                            case 1:
+                                // Search for a Library Item by Title
                                 System.out.println("Search for a library item by title");
                                 System.out.println("Enter the title of the publication you would like to search for: ");
                                 String title = scanner.nextLine();
@@ -608,10 +652,9 @@ public class LibraryMenu {
                                     System.out.println("Publisher: " + publication.getPublisher());
                                     System.out.println("");
                                 }
-                                
                                 break;
-
                             case 2:
+                                // Search for a Library Item by Author
                                 System.out.println("What is the name of the author you would like to search for?");
                                 Author author = library.getAuthor(scanner.nextLine());
                                 if (author == null) {
@@ -626,12 +669,11 @@ public class LibraryMenu {
                                     System.out.println("");
                                 }
                                 break;
-                            case 3: // Search by ISBN
-
+                            case 3:
+                                // Search for a Library Item by ISBN
                                 System.out.println("Searching for a library item by ISBN...");
                                 System.out.println("Enter the ISBN of the publication you would like to search for: ");
                                 String isbn = scanner.nextLine();
-
                                 Publication publication = library.getPublicationByISBN(isbn);
                                 if (publication == null) {
                                     System.out.println("Publication not found.");
@@ -642,10 +684,10 @@ public class LibraryMenu {
                                     System.out.println("Publisher: " + publication.getPublisher());
                                     System.out.println("");
                                 }
-
                                 break;
                             case 4:
-                                System.out.println("Press 4 to go back to the main menu.");
+                                // Go back to the main menu
+                                System.out.println("Going back to the main menu.");
                                 break;
                             default:
                                 System.out.println("Invalid choice. Please enter a number between 1 and 4.");
@@ -655,6 +697,7 @@ public class LibraryMenu {
                     }
                     break;
                 case 7:
+                    // Exit
                     System.out.println("Exiting the system. Goodbye!");
                     running = false;
                     break;
