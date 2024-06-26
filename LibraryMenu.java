@@ -1,5 +1,6 @@
 
 import java.util.Scanner;
+import java.util.List;
 
 import Authors.Author;
 import LibraryItems.BookAudio;
@@ -53,6 +54,7 @@ public class LibraryMenu {
             System.out.print("Enter your choice (1-7): ");
 
             int option = scanner.nextInt();
+            scanner.nextLine();
 
             switch (option) {
                 case 1:
@@ -75,6 +77,7 @@ public class LibraryMenu {
                                 System.out.println("4. PeriodicalPrinted");
                                 System.out.println("5. PeriodicalElectronic");
                                 int typeOption = scanner.nextInt();
+                                scanner.nextLine();
                                 String title, authorName, publisher, ISBN, voicedBy;
                                 int numOfPages, duration, issueNum;
                                 Author author;
@@ -105,7 +108,6 @@ public class LibraryMenu {
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
                                         authorName = scanner.nextLine();
-                                        // Check if author exists in the library
                                         if (library.getAuthor(authorName) == null) {
                                             System.out.println("Author not found. Please add the author first.");
                                             break;
@@ -168,7 +170,6 @@ public class LibraryMenu {
                                         title = scanner.nextLine();
                                         System.out.println("Who is the author of the book?");
                                         authorName = scanner.nextLine();
-                                        // Check if author exists in the library
                                         if (library.getAuthor(authorName) == null) {
                                             System.out.println("Author not found. Please add the author first.");
                                             break;
@@ -187,17 +188,17 @@ public class LibraryMenu {
                                 }
                                 break;
                             case 2:
-
-                                String newTitle, newAuthorName, newPublisher, newISBN, nwevoicedBy;
+                                String newTitle, newAuthorName, newPublisher, newISBN, newVoicedBy;
                                 int newNumOfPages, newDuration, newIssueNum;
                                 Author newAuthor;
+                                Publication newPublication;
                                 System.out.println("What is the title of the item you would like to edit?");
-                                publication = library.getPublication(scanner.nextLine());
-                                if (publication == null) {
+                                newPublication = library.getPublication(scanner.nextLine());
+                                if (newPublication == null) {
                                     System.out.println("Publication not found. Please try again.");
                                     break;
                                 } else {
-                                    switch (publication.getClass().getName()) {
+                                    switch (newPublication.getClass().getSimpleName()) {
                                         case "BookPrinted":
                                             System.out.println("What is the new title of the book?");
                                             newTitle = scanner.nextLine();
@@ -215,7 +216,7 @@ public class LibraryMenu {
                                             newISBN = scanner.nextLine();
                                             System.out.println("How many pages does the book have?");
                                             newNumOfPages = scanner.nextInt();
-                                            BookPrinted.editPublication((BookPrinted) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
+                                            BookPrinted.editPublication((BookPrinted) newPublication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
                                             System.out.println("Book edited successfully!");
                                             break;
                                         case "BookElectronic":
@@ -235,7 +236,7 @@ public class LibraryMenu {
                                             newISBN = scanner.nextLine();
                                             System.out.println("How many pages does the book have?");
                                             newNumOfPages = scanner.nextInt();
-                                            BookElectronic.editPublication((BookElectronic) publication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
+                                            BookElectronic.editPublication((BookElectronic) newPublication, newTitle, newAuthor, newPublisher, newISBN, newNumOfPages);
                                             System.out.println("Book edited successfully!");
                                             break;
                                         case "BookAudio":
@@ -256,8 +257,8 @@ public class LibraryMenu {
                                             System.out.println("What is the new duration of the book in seconds?");
                                             newDuration = scanner.nextInt();
                                             System.out.println("Who is the new narrator of the book?");
-                                            nwevoicedBy = scanner.nextLine();
-                                            BookAudio.editPublication((BookAudio) publication, newTitle, newAuthor, newPublisher, newISBN, newDuration, nwevoicedBy);
+                                            newVoicedBy = scanner.nextLine();
+                                            BookAudio.editPublication((BookAudio) newPublication, newTitle, newAuthor, newPublisher, newISBN, newDuration, newVoicedBy);
                                             System.out.println("Book edited successfully!");
                                             break;
                                         case "PeriodicalPrinted":
@@ -277,7 +278,7 @@ public class LibraryMenu {
                                             newIssueNum = scanner.nextInt();
                                             System.out.println("How many pages does the periodical have?");
                                             newNumOfPages = scanner.nextInt();
-                                            PeriodicalPrinted.editPublication((PeriodicalPrinted) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
+                                            PeriodicalPrinted.editPublication((PeriodicalPrinted) newPublication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
                                             System.out.println("Periodical edited successfully!");
                                             break;
                                         case "PeriodicalElectronic":
@@ -297,28 +298,14 @@ public class LibraryMenu {
                                             newIssueNum = scanner.nextInt();
                                             System.out.println("How many pages does the periodical have?");
                                             newNumOfPages = scanner.nextInt();
-                                            PeriodicalElectronic.editPublication((PeriodicalElectronic) publication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
+                                            PeriodicalElectronic.editPublication((PeriodicalElectronic) newPublication, newTitle, newAuthor, newPublisher, newIssueNum, newNumOfPages);
                                             System.out.println("Periodical edited successfully!");
-                                            break; 
+                                            break;
+                                        default:
+                                            System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                                            continue;
                                     }
                                 }
-                                System.out.println("Which item would you like to edit?");
-                                System.out.println("2. BookElectronic");
-                                System.out.println("3. BookAudio");
-                                System.out.println("4. PeriodicalPrinted");
-                                System.out.println("5. PeriodicalElectronic");
-                                int editTypeOption = scanner.nextInt();
-                                String title, authorName, publisher, ISBN, voicedBy;
-                                int numOfPages, duration, issueNum;
-                                Author author;
-
-                                switch (editTypeOption) {
-                                    System.out.println("What is the title of the book?");
-                                }
-                                
-                                
-
-
                                 break;
                             case 3:
                                 System.out.println("What is the title of the item you would like to edit?");
@@ -415,6 +402,7 @@ public class LibraryMenu {
                                 System.out.println("2. Employee");
                                 System.out.println("3. Regular");
                                 int typeOption = scanner.nextInt();
+                                scanner.nextLine();
                                 switch (typeOption) {
                                     case 1:
                                         System.out.println("What is the name of the student?");
@@ -464,7 +452,7 @@ public class LibraryMenu {
                                     System.out.println("Patron not found. Please try again.");
                                     break;
                                 } else {
-                                    switch (patron.getClass().getName()) {
+                                    switch (patron.getClass().getSimpleName()) {
                                         case "Student":
                                             System.out.println("What is the new name of the student?");
                                             name = scanner.nextLine();
@@ -531,6 +519,7 @@ public class LibraryMenu {
                         System.out.println("2. Go Back");
 
                         int borrowOption = scanner.nextInt();
+                        scanner.nextLine();
                         Patron patron;
                         Publication publication;
 
@@ -569,6 +558,7 @@ public class LibraryMenu {
                         System.out.println("2. Go Back");
 
                         int returnOption = scanner.nextInt();
+                        scanner.nextLine();
 
                         switch (returnOption) {
                             case 1:
@@ -600,6 +590,7 @@ public class LibraryMenu {
                         System.out.println("4. Go Back");
 
                         int searchOption = scanner.nextInt();
+                        scanner.nextLine();
 
                         switch (searchOption) {
                             case 1: // Search by Title
@@ -612,7 +603,10 @@ public class LibraryMenu {
                                 } else {
                                     Publication publication = library.getPublication(title);
                                     System.out.println("Publication found:");
-                                    System.out.println(publication);
+                                    System.out.println("Title: " + publication.getTitle());
+                                    System.out.println("Author: " + publication.getAuthor().getName());
+                                    System.out.println("Publisher: " + publication.getPublisher());
+                                    System.out.println("");
                                 }
                                 
                                 break;
@@ -626,16 +620,12 @@ public class LibraryMenu {
                                 }
                                 List<Publication> publicationsByAuthor = library.getPublicationByAuthors(author.getName());
                                 for (Publication publication : publicationsByAuthor) {
-                                    System.out.println(publication.getTitle());
+                                    System.out.println("Title: " + publication.getTitle());
+                                    System.out.println("Author: " + publication.getAuthor().getName());
+                                    System.out.println("Publisher: " + publication.getPublisher());
+                                    System.out.println("");
                                 }
                                 break;
-                            case 3:
-
-
-                            case 2: // Search by Author
-                                System.out.println("Search for a library item by author.");
-                                break;
-
                             case 3: // Search by ISBN
 
                                 System.out.println("Searching for a library item by ISBN...");
@@ -647,7 +637,10 @@ public class LibraryMenu {
                                     System.out.println("Publication not found.");
                                 } else {
                                     System.out.println("Publication found:");
-                                    System.out.println(publication);
+                                    System.out.println("Title: " + publication.getTitle());
+                                    System.out.println("Author: " + publication.getAuthor().getName());
+                                    System.out.println("Publisher: " + publication.getPublisher());
+                                    System.out.println("");
                                 }
 
                                 break;
@@ -663,11 +656,12 @@ public class LibraryMenu {
                     break;
                 case 7:
                     System.out.println("Exiting the system. Goodbye!");
-                    scanner.close();
+                    running = false;
                     break;
                 default:
-                    System.out.println("Invalid choice. Please enter a number between 1 and 6.");
+                    System.out.println("Invalid choice. Please enter a number between 1 and 7.");
             }
         }
+        scanner.close();
     }
 }
